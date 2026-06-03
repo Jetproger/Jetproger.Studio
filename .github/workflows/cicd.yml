@@ -24,9 +24,9 @@ jobs:
       with:
         dotnet-version: '9.x'
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
     - name: Build
-      run: dotnet build --no-restor
+      run: dotnet build --no-restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
         
     - name: Run tests
       run: echo "Hello, GitHub Actions!"
