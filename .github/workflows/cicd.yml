@@ -17,7 +17,12 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v6
       with:
-        python-version: '3.10'
+        python-version: '3.14'
+        cache: 'pip'
+
+    - name: Install Python dependencies
+      run: |
+        pip install pytest pyodbc
 
     - name: Setup .NET 9.x
       uses: actions/setup-dotnet@v5
@@ -27,6 +32,14 @@ jobs:
       run: dotnet restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
     - name: Build
       run: dotnet build --no-restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
+
+    - name: Setup MS SQL Server
+      uses: Particular/install-sql-server-action@v1.4.0
+      with:
+        catalog: JetprogerStudio
+        connection-string-env-var: SQL_CONNECTION_STRING
+        collation: SQL_Latin1_General_CP1_CS_AS
+        extra-params: ;TrustServerCertificate=yes;Trusted_Connection=yes;
         
     - name: Run tests
       run: echo "Hello, GitHub Actions!"
