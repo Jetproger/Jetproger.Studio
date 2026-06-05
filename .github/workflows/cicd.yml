@@ -14,7 +14,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v6
       
-    - uses: ${{ github.workspace }}/.github/actions/setup-python
+    - uses: ./.github/actions/setup-python
+      with:
+        workspace-path: ${{ github.workspace }}
 
     - name: Setup .NET 9.x
       uses: actions/setup-dotnet@v5
