@@ -11,4 +11,3 @@ runs:
         connection-string-env-var: SQL_CONNECTION_STRING
         collation: SQL_Latin1_General_CP1_CS_AS
         extra-params: ;TrustServerCertificate=yes;Trusted_Connection=yes;
-      shell: bash

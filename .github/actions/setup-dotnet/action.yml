@@ -8,4 +8,3 @@ runs:
       uses: actions/setup-dotnet@v5
       with:
         dotnet-version: '9.x'
-      shell: bash
