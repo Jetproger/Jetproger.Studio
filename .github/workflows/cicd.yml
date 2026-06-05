@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  build:
     runs-on: windows-latest
     
     steps:
@@ -17,23 +17,19 @@ jobs:
     - uses: ./.github/actions/setup-python
       with:
         workspace-path: ${{ github.workspace }}
-
-    - name: Setup .NET 9.x
-      uses: actions/setup-dotnet@v5
+      
+    - uses: ./.github/actions/setup-dotnet
       with:
-        dotnet-version: '9.x'
-    - name: Install dependencies
+        workspace-path: ${{ github.workspace }}
+
+    - name: Restore
       run: dotnet restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
     - name: Build
       run: dotnet build --no-restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
-
-    - name: Setup MS SQL Server
-      uses: Particular/install-sql-server-action@v1.4.0
+      
+    - uses: ./.github/actions/setup-mssql
       with:
-        catalog: JetprogerStudio
-        connection-string-env-var: SQL_CONNECTION_STRING
-        collation: SQL_Latin1_General_CP1_CS_AS
-        extra-params: ;TrustServerCertificate=yes;Trusted_Connection=yes;
+        workspace-path: ${{ github.workspace }}
         
     - name: Run tests
       run: echo "Hello, GitHub Actions!"

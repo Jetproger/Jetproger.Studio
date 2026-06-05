@@ -1,0 +1,14 @@
+# .github/actions/setup-mssql/action.yml
+name: 'Setup MS SQL Server'
+description: 'Sets up MS SQL Server'
+runs:
+  using: "composite"
+  steps:
+    - name: Setup MS SQL Server
+      uses: Particular/install-sql-server-action@v1.4.0
+      with:
+        catalog: JetprogerStudio
+        connection-string-env-var: SQL_CONNECTION_STRING
+        collation: SQL_Latin1_General_CP1_CS_AS
+        extra-params: ;TrustServerCertificate=yes;Trusted_Connection=yes;
+      shell: bash

@@ -1,0 +1,11 @@
+# .github/actions/setup-dotnet/action.yml
+name: 'Setup .NET 9.x'
+description: 'Sets up .NET 9.x'
+runs:
+  using: "composite"
+  steps:
+    - name: Setup .NET 9.x
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '9.x'
+      shell: bash
