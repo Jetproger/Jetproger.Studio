@@ -1,18 +1,18 @@
 # .github/actions/setup-dotnet/action.yml
-name: 'Setup .NET 9.x'
-description: 'Sets up .NET 9.x'
+name: 'Generate Jetproger.Kit.Transformings'
+description: 'Generate package Jetproger.Kit.Transformings'
 runs:
   using: "composite"
   steps:
     - name: Restore Jetproger.Kit.Transformings
-      run: dotnet restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
+      run: dotnet restore ${{ github.workspace }}\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
       shell: bash
     - name: Build Jetproger.Kit.Transformings
-      run: dotnet build -c Release --no-restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
+      run: dotnet build -c Release --no-restore ${{ github.workspace }}\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
       shell: bash
     - name: Pack NuGet Package Jetproger.Kit.Transformings
-      run: dotnet pack -c Release --no-build .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln -o .\.artifacts
+      run: dotnet pack -c Release --no-build ${{ github.workspace }}\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln -o .\.artifacts
       shell: bash
     - name: Push NuGet Packages
-      run: dotnet nuget push ".\.artifacts\*.nupkg" --source ${{ github.workspace }}\.packages
+      run: dotnet nuget push "${{ github.workspace }}\.artifacts\*.nupkg" --source ${{ github.workspace }}\.packages
       shell: bash
