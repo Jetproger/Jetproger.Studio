@@ -14,5 +14,5 @@ runs:
       run: dotnet pack -c Release --no-build "./Jetproger.Kit.Transformings/Jetproger.Kit.Transformings.sln" -o "./.artifacts"
       shell: bash
     - name: Push NuGet Packages
-      run: dotnet nuget push "./.artifacts/*.nupkg" --source "${{ github.workspace }}/.packages"
+      run: dotnet nuget push "${{ github.workspace }}\.artifacts\*.nupkg" --source "${{ github.workspace }}\.packages"
       shell: bash
