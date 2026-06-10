@@ -8,7 +8,7 @@ runs:
       run: dotnet restore "./Jetproger.Kit.Transformings/Jetproger.Kit.Transformings.sln"
       shell: bash
     - name: Build Jetproger.Kit.Transformings
-      run: dotnet build -c Release --no-restore './Jetproger.Kit.Transformings/Jetproger.Kit.Transformings.sln"
+      run: dotnet build -c Release --no-restore "./Jetproger.Kit.Transformings/Jetproger.Kit.Transformings.sln"
       shell: bash
     - name: Pack NuGet Package Jetproger.Kit.Transformings
       run: dotnet pack -c Release --no-build "./Jetproger.Kit.Transformings/Jetproger.Kit.Transformings.sln" -o "./.artifacts"
