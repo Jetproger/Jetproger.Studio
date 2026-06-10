@@ -40,5 +40,5 @@ jobs:
       with:
         name: windows-build-output
         path: |
-          ${{ github.workspace }}\.artifacts\
+          ${{ github.workspace }}\.packages\
         retention-days: 3
