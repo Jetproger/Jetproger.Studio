@@ -9,27 +9,36 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v6
-      
+
     - uses: ./.github/actions/setup-python
       with:
         workspace-path: ${{ github.workspace }}
-      
+
     - uses: ./.github/actions/setup-dotnet
       with:
         workspace-path: ${{ github.workspace }}
+    - name: Create NuGet repository
+      run: dotnet nuget add source ".\.packages" -n JetprogerStudioPackages
 
-    - name: Restore
-      run: dotnet restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
-    - name: Build
-      run: dotnet build --no-restore .\Jetproger.Kit.Transformings\Jetproger.Kit.Transformings.sln
-      
+    - uses: ./.github/actions/build-transformings
+      with:
+        workspace-path: ${{ github.workspace }}
+
     - uses: ./.github/actions/setup-mssql
       with:
         workspace-path: ${{ github.workspace }}
-        
+
     - name: Run tests
       run: echo "Hello, GitHub Actions!"
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v7
+      with:
+        name: windows-build-output
+        path: |
+          .packages/
+        retention-days: 3
