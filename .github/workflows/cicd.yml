@@ -38,7 +38,7 @@ jobs:
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v7
       with:
-        name: windows-build-output
-        path: |
-          ${{ github.workspace }}\.packages\
+        name: packages-output
+        path: .packages/
+        include-hidden-files: true
         retention-days: 3
